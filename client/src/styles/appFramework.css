@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  transition: 300ms filter;
+  font-family: 'Open Sans', sans-serif;
+  /*font-family: "Open Sans Light", sans-serif;*/
+}
+
+.loaderContainer {
+  height: 20px;
+  width: 20px;
+  overflow: hidden;
+  padding: 4px;
+}
+
+.loader {
+  height: calc(100% - 8px);
+  width: calc(100% - 8px);
+  border-top: 4px solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid rgba(0, 0, 0, 0.1);
+  border-right: 4px solid rgba(0, 0, 0, 0.35);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.35);
+  border-radius: 50%;
+  animation: loader linear 0.4s infinite;
+  /*box-shadow: 0 0 5px #000, inset 0 0 5px #000;*/
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes loader {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
+}
+
+::selection {
+  /*color: rgba(225, 225, 225, 1);*/
+  /*text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8);*/
+  background-color: rgba(168, 206, 255, 0.45);
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.useScrollBar::-webkit-scrollbar {
+  width: 10px;
+  margin-right: 2px;
+}
+ 
+.useScrollBar::-webkit-scrollbar-track {
+  /*box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+  background-color: rgba(0, 0, 0, 0.15);
+}
+ 
+.useScrollBar::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
