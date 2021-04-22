@@ -94,9 +94,19 @@
           <i class="fas fa-ellipsis-v centerizeHorizontally"></i>
         </div>
       </div>
-      <div class="channelContent useScrollBar" onLoad="setInterval(App.UI.content.chatWindow.updateScrollFunc, 500);" onScroll="App.UI.content.chatWindow.onScroll();">
+      <div class="channelContent useScrollBar" onLoad="setInterval(App.UI.content.chatWindow.updateScrollFunc, 500);">
         <div class="channelChats centerizeVertically">
-          <div class="loaderContainer"><div class="loader"></div></div>
+          <div class="loaderContainer"><div class="loader"></div></div><div class="chatEntry">
+            <span>Kaveman</span>
+            <div></div>
+            <div class="fileAttachment unknown">
+              <div class="fileDetails">
+                <a href="/attachment/12132117559350" target="_blank">New Text Document.txt</a>
+                <span class="fileSize">15 bytes</span>
+              </div>
+              <a class="downloadBtn" href="/attachment/12132117559350" download></a>
+            </div>
+          </div>
           <!--<div class="chatEntry">
             <span>doggie</span>
             <div>i ran out of ideas what to say in these messages</div>
@@ -128,10 +138,15 @@
             <td class="attachBtn">
               <input id="attachment" type="file" name="attachment" hidden />
               <label for="attachment"></label>
+              <div class="detachFileBtn disabled">
+                <div class="dot"></div>
+              </div>
             </td>
             <!--<td><i class="fas fa-microphone"></i></td>-->
             <td class="inputField">
-              <input type="text" name="msg" placeholder="Say something..." />
+              <div>
+                <textarea name="msg" class="useScrollBar" placeholder="Say something..."></textarea>
+              </div>
             </td>
             <td class="addEmojiBtn"></td>
           </tr>
