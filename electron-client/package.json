@@ -1,0 +1,15 @@
+{
+  "name": "skychat",
+  "version": "0.1.0",
+  "description": "SkyChat!",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "Kaveman",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^12.0.5"
+  }
+}
