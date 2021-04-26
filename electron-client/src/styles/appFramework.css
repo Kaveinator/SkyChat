@@ -4,8 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 :root {
-  --header-height: 20px;
-  --header-padding: 15px;
+  --header-height: 0px;
+  --header-padding: 0px;
 }
 
 html, body {
@@ -111,6 +111,7 @@ body.maximized {
   width: 100%;
   height: var(--header-height);
   z-index: 100;
+  display: none;
 }
 
 .windowTitle .windowTitleText {
