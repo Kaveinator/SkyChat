@@ -296,7 +296,7 @@ var App = {
           fileDetails.classList.add("fileDetails");
           {
             let fileName = document.createElement("a");
-            fileName.setAttribute("href", "/attachment/" + msg.Attachment.Id);
+            fileName.setAttribute("href", "/attachment/" + msg.Attachment.Id + "/" + msg.Attachment.Name);
             fileName.setAttribute("target", "_blank");
             fileName.appendChild(document.createTextNode(msg.Attachment.Name));
             fileDetails.appendChild(fileName);
@@ -310,7 +310,7 @@ var App = {
 
           let downloadBtn = document.createElement("a");
           downloadBtn.classList.add("downloadBtn");
-          downloadBtn.setAttribute("href", "/attachment/" + msg.Attachment.Id);
+          downloadBtn.setAttribute("href", "/attachment/" + msg.Attachment.Id + "/" + msg.Attachment.Name);
           downloadBtn.setAttribute("download", string.Empty);
           fileAttachment.appendChild(downloadBtn);
         }

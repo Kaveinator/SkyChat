@@ -15,6 +15,13 @@ html, body {
   /*font-family: "Open Sans Light", sans-serif;*/
 }
 
+.fillScreen {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+
 .loaderContainer {
   height: 20px;
   width: 20px;
