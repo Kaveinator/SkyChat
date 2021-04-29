@@ -9,9 +9,9 @@
     <link href="./src/styles/mobileOverride.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
-		<div class="windowTitle" ondblclick="console.log(1);">
-			<div class="windowTitleText centerizeVertically" ondblclick="console.log(2);">SkyChat</div>
-			<div class="dragableHeader centerizeVertically" ondblclick="console.log(3);"></div>
+		<div class="windowTitle">
+			<div class="windowTitleText centerizeVertically">SkyChat</div>
+			<div class="dragableHeader centerizeVertically"></div>
 			<div class="centerizeHorizontally windowBtns">
 				<!--<div class="minBtn"></div>
 				<div class="maxBtn"></div>-->
@@ -104,7 +104,11 @@
             </table>
           </form>
           <i class="far fa-bell centerizeHorizontally"></i>-->
-          <i class="fas fa-ellipsis-v centerizeHorizontally"></i>
+          <i class="fas fa-ellipsis-v centerizeHorizontally" onClick="document.querySelector('.channelHeaderMenu').classList.toggle('show');"></i>
+        </div>
+        <div class="channelHeaderMenu centerizeVertically">
+          <a href="#">Settings</a>
+          <a href="#">Logout</a>
         </div>
       </div>
       <div class="channelContent useScrollBar" onLoad="setInterval(App.UI.content.chatWindow.updateScrollFunc, 500);">
@@ -162,10 +166,27 @@
                 <textarea name="msg" class="useScrollBar" placeholder="You do not have permission to send messages here" disabled></textarea>
               </div>
             </td>
-            <td class="addEmojiBtn"></td>
+            <td class="addEmojiBtn" onclick="document.querySelector('.channelEmojiInput').classList.toggle('hide');"></td>
           </tr>
         </table>
       </form>
+      <div class="channelEmojiInput useScrollBar clearfix hide">
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :smile:')"><div class="emoji smile"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :lol:')"><div class="emoji lol"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :sad:')"><div class="emoji sad"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :neutral:')"><div class="emoji neutral"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :cool:')"><div class="emoji cool"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :confused:')"><div class="emoji confused"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :grinning:')"><div class="emoji grinning"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :grimacing:')"><div class="emoji grimacing"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :sweat_smile:')"><div class="emoji sweat_smile"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :sweat:')"><div class="emoji sweat"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :thinking:')"><div class="emoji thinking"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :thumbsup:')"><div class="emoji thumbsup"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :thumbsdown:')"><div class="emoji thumbsdown"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :ok_hand:')"><div class="emoji ok_hand"></div></div>
+        <div class="emojiBtn centerizeVertically" onClick="insertAtCursor(App.UI.content.inputForm.msg, ' :unknown:')"><div class="emoji unknown"></div></div>
+      </div>
     </content>
     <aside>
       <div class="header">Members</div>
@@ -173,7 +194,12 @@
         <div class="entry" style="text-align: center;">You do not have access to member listing</div>
       </div>
     </aside>
+    
+    <script src="http://skynet-js.hns.siasky.net/4.0-beta/index.js"></script>
+    <script src="https://siasky.net/_AAnblJDpo1aB9bjN5VFsZUTPBasmujkcQuiEDibAO6rQQ"></script>
+
     <script src="https://kit.fontawesome.com/2a33003987.js" crossorigin="anonymous"></script>
     <script src="./src/scripts/app.js"></script>
+
 	</body>
 </html>

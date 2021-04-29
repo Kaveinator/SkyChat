@@ -2,6 +2,8 @@
 var App = {
   Start: () => {
     App.RenderServers();
+    Network();
+
     App.UI.content.inputForm.attachment.onchange = event => {
       let formElem = App.UI.content.inputForm;
       let detachBtn = formElem.querySelector(".detachFileBtn");
@@ -24,6 +26,25 @@ var App = {
 
   },
   UI: {
+    emojis: {
+      list: [
+        "smile",
+        "lol",
+        "sad",
+        "neutral",
+        "cool",
+        "confused",
+
+        "grinning",
+        "grimacing",
+        "sweat_smile",
+        "sweat",
+        "thinking",
+        "thumbsup",
+        "thumbsdown",
+        "ok_hand"
+      ]
+    },
     nav: document.getElementsByTagName("nav")[0],
     header: {
       serverNameElem: document.getElementById("headerServerName"),
@@ -64,7 +85,7 @@ var App = {
                   Id: 4,
                   Content: "Hi"
                 },
-                {
+                /*{
                   User: "doggie",
                   Id: 1234324,
                   Content: "",
@@ -81,6 +102,11 @@ var App = {
                     Type: "vid",
                     Source: "https://siasky.net/_AkO1puhdsF1fbpClg6CEmcTSyIdMS9EimkqZBZP_Dfw5w"
                   }
+                },*/
+                {
+                  User: "Kaveman",
+                  Id: 532423,
+                  Content: "Hey, my names Jeff and I like to :smile:, idk what else to do so heres an lol emoji :lol:, just don't feel :sad:, but I prob won't even :neutral: since I am a bot :cool:... Why art though not respon :confused:"
                 }
               ]
             }
@@ -340,9 +366,18 @@ var App = {
       let usernameField = document.createElement("span");
       usernameField.appendChild(document.createTextNode(msg.User));
       baseElem.appendChild(usernameField);
-      
+
       let messageField = document.createElement("div");
-      messageField.appendChild(document.createTextNode(msg.Content));
+      //messageField.classList.add("centerizeHorizontally");
+      let msgContents = msg.Content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      msgContents = msgContents.replaceAll("\\n", "<br />");
+      App.UI.emojis.list.forEach(emoji => {
+        let e = "<span class='emoji " + emoji + "'></span>";
+        msgContents = msgContents.replaceAll(":" + emoji + ":", e);
+      });
+
+      messageField.innerHTML = msgContents;
+      //messageField.appendChild(document.createTextNode(msg.Content));
       baseElem.appendChild(messageField);
 
       if (msg.Attachment) {
@@ -534,14 +569,13 @@ var App = {
         let finalMsg = string.ToBase64(msgObject.value.trim());
         let fileName = file.name;
         let fileContents = string.ToBase64(event.target.result);
-        
-        console.log(JSON.stringify({
-          serverId: App.currentSet.serverData.Id,
-          channelId: App.currentSet.channelData.Id,
+        let json = {
           message: msgObject.value.trim(),
-          fileName: file.name,
-          fileData: event.target.result
-        }, null, 2));
+        };
+        console.log(JSON.stringify(json, null, 2));
+
+        Network.setJSON(json);
+
         //App.network.SendMessageRequest(
         //  App.currentSet.serverData.Id,  // serverId
         //  App.currentSet.channelData.Id, // channelId
@@ -549,6 +583,7 @@ var App = {
         //  fileName,                      // attachment name
         //  fileContents                   // attachment data
         //);
+
         msgObject.value = "";
         App.UI.content.inputForm.querySelector(".detachFileBtn").onclick();
       };
@@ -572,9 +607,6 @@ var App = {
       //  string.Empty                   // attachment data (none)
       //);
     }
-  },
-  network: {
-    // doggie, your up
   }
 };
 
@@ -590,3 +622,64 @@ window.onload = () => {
   //App.StartTutorial();
   App.Start();
 };
+
+function Network() {
+
+  const client = new skynet.SkynetClient("https://siasky.net");
+
+  var random = Math.random().toString();
+  var { publicKey, privateKey, seed } = skynet.genKeyPairAndSeed(random);
+
+  console.log(publicKey);
+
+  const dataKey = "myApp";
+
+  async function setJSON(_json) 
+  {
+      try {
+          console.log("sending json");
+          await client.db.setJSON(privateKey, dataKey, _json);
+          getJSON();
+      } catch (error) {
+          console.log(error);
+      }
+  }
+
+  async function getJSON() 
+  {
+      try {
+          const { data, skylink } = await client.db.getJSON(publicKey, dataKey);
+      } catch (error) {
+          console.log(error);
+      }   
+  }
+
+  async function sendFile() {
+      try {
+          const { skylink } = await client.uploadFile(file);
+      } catch (error) {
+          console.log(error)
+      }
+  }
+}
+
+// Copied from Stack Overflow: https://stackoverflow.com/questions/11076975/how-to-insert-text-into-the-textarea-at-the-current-cursor-position
+// Adds support to add emoji's at cursor (in input)
+function insertAtCursor(myField, myValue) {
+  //IE support
+  if (document.selection) {
+      myField.focus();
+      sel = document.selection.createRange();
+      sel.text = myValue;
+  }
+  //MOZILLA and others
+  else if (myField.selectionStart || myField.selectionStart == '0') {
+      var startPos = myField.selectionStart;
+      var endPos = myField.selectionEnd;
+      myField.value = myField.value.substring(0, startPos)
+          + myValue
+          + myField.value.substring(endPos, myField.value.length);
+  } else {
+      myField.value += myValue;
+  }
+}
